@@ -134,6 +134,13 @@ def query_jde_database(sql: str) -> str:
     approved tables are permitted, and results are capped — ask a more
     specific question if you need a narrower slice of data.
 
+    BEFORE writing any SQL to extract data: (1) if JDE skills are available
+    in this session (e.g. jde-data-architecture, jde-business-data), load
+    and follow them first — they hold the correct tables, joins, status
+    codes and conventions; (2) call get_jde_schema; (3) verify any column
+    or status code you are not sure of against the database itself instead
+    of guessing. Only then write the query.
+
     If the result starts with REFUSED, ACCESS ERROR, NOT FOUND, or SERVICE
     ERROR: this is a final answer, not a setback to work around. Tell the
     user in one short, plain sentence that they don't have access to that

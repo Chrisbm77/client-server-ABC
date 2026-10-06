@@ -1,3 +1,5 @@
 .env
 __pycache__/
 *.pyc
+.device_id
+dist/
