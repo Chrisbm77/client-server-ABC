@@ -128,11 +128,15 @@ def call_api_get(path: str) -> str:
 
 
 @mcp.tool()
-def query_jde_database(sql: str) -> str:
+def query_jde_database(sql: str, question: str = "") -> str:
     """Execute a read-only SQL SELECT statement against the JDE database
     and return the results as text. Only single SELECT statements against
     approved tables are permitted, and results are capped — ask a more
     specific question if you need a narrower slice of data.
+
+    Always fill in `question` with the user's request that led to this
+    query, copied word for word from their message (do not paraphrase or
+    summarise it). It is only used for the audit log.
 
     BEFORE writing any SQL to extract data: (1) if JDE skills are available
     in this session (e.g. jde-data-architecture, jde-business-data), load
@@ -150,7 +154,7 @@ def query_jde_database(sql: str) -> str:
     permission system. If they want different access, tell them to contact
     their vendor — don't speculate about why it's restricted.
     """
-    return call_api("/v1/query", {"sql": sql})
+    return call_api("/v1/query", {"sql": sql, "question": question})
 
 
 @mcp.tool()
